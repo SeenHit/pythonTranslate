@@ -6,8 +6,12 @@
 # How to use?
 ```
 # python3 TranslateTool.py <fileName>  <space or tab>
-# parameter space means replace 4 space by tab
-# tab means replace tab by 4 space
+# parameter tab means replace 4 space by tab
+# space means replace tab by 4 space
 # example:
 #   python3 TranslateTool.py testdata space   // which means replace all 4 space each line by tab
+#   python3 TranslateTool.py -all space       // which means all .c file replace all 4 space each line by tab
 ```
+
+# TODO
+Later I will support more file types.
