@@ -45,7 +45,12 @@ if __name__ == "__main__":
 	command = sys.argv[2]
 
 	if (fileName == "-all"):
-		os.system("find * -name *.c > data")
+		if (len(sys.argv) < 4):
+			print ("if you select replace all file module, you need input file type!")
+			os._exit(0)
+		fileType = sys.argv[3]
+		cmd = "find * -name *" + fileType + " > data" 
+		os.system(cmd)
 		f_data = open("data")
 		while True:
 			fileName = f_data.readline()
