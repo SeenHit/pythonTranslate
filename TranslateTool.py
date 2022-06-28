@@ -13,6 +13,14 @@ import sys
 # example:
 #   python3 TranslateTool.py testdata space   // which means replace all 4 space each line by tab
 
+def IsBlankLine(content):
+	content = content.rstrip('\n')
+	content = content.replace('\t', '    ')
+	for i in range(0, len(content)):
+		if (content[i] != ' '):
+			return False
+	return True
+
 def replaceFile(fileName, command):
 	# replace 	
 	filep = open(fileName)
@@ -21,6 +29,10 @@ def replaceFile(fileName, command):
 		line = filep.readline()
 		if not line:
 			break
+		if IsBlankLine(line):
+			print ("bingo")
+			content = content + "\n"
+			continue
 		if "space" in command:
 			content = content + line.replace('\t', '    ')
 		else:
@@ -61,21 +73,4 @@ if __name__ == "__main__":
 		os._exit(0)
 
 	# single file replace	
-	filep = open(fileName)
-	content = ""
-	while True:
-		line = filep.readline()
-		if not line:
-			break
-		if "space" in command:
-			content = content + line.replace('\t', '    ')
-		else:
-			content = content + line.replace('    ', '\t')
-	filep.close()
-	os.system("rm " + fileName)
-	
-	# write down content to origin file
-	f = open(fileName, 'w')
-	f.write(content)
-	f.close()
-	print ("replace data success! check it!")
+	replaceFile(fileName, command)
