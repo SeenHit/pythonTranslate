@@ -1,4 +1,20 @@
-#########
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+#
+# Copyright (c) 2021-2022 Hacash Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
 __author__ = "William <williamsukatube@gmail.com>"
 __version__ = "v 0.1"
@@ -22,34 +38,37 @@ def IsBlankLine(content):
 	return True
 
 def replaceFile(fileName, command):
-	# replace 	
-	filep = open(fileName)
-	content = ""
-	while True:
-		line = filep.readline()
-		if not line:
-			break
-		if IsBlankLine(line):
-			content = content + "\n"
-			continue
-		if "space" in command:
-			content = content + line.replace('\t', '    ').rstrip().rstrip('\t') + "\n"
-		elif "tab" in command:
-			content = content + line.replace('    ', '\t').rstrip().rstrip('\t') + "\n"
-		else:
-			content = content + line.rstrip().rstrip('\t') + "\n"
-	filep.close()
-	os.system("rm " + fileName)
-	
-	# write down content to origin file
-	f = open(fileName, 'w')
-	f.write(content)
-	f.close()
-	print ("clean file <" + fileName.rstrip('\n') + "> success! check it!")
+	# replace
+	try:
+		filep = open(fileName)
+		content = ""
+		while True:
+			line = filep.readline()
+			if not line:
+				break
+			if IsBlankLine(line):
+				content = content + "\n"
+				continue
+			if "space" in command:
+				content = content + line.replace('\t', '    ').rstrip().rstrip('\t') + "\n"
+			elif "tab" in command:
+				content = content + line.replace('    ', '\t').rstrip().rstrip('\t') + "\n"
+			else:
+				content = content + line.rstrip().rstrip('\t') + "\n"
+		filep.close()
+		os.system("rm " + fileName)
+
+		# write down content to origin file
+		f = open(fileName, 'w')
+		f.write(content)
+		f.close()
+		print ("clean file <" + fileName.rstrip('\n') + "> success! check it!")
+	except:
+		os.system("rm " + fileName)
 
 def DoCleanupJob():
 	fileType = sys.argv[2]
-	cmd = "find * -name *" + fileType + " > data"
+	cmd = "find * -name \"*" + fileType + "\" > data"
 	os.system(cmd)
 	f_data = open("data")
 	while True:
@@ -76,7 +95,7 @@ if __name__ == "__main__":
 		if (cmd.find("-h") != -1 or cmd.find("--help") != -1):
 			PrintUsage()
 			os._exit(0)
-	
+
 	# parse filename and command
 	fileName = sys.argv[1]
 	command = sys.argv[2]
@@ -92,7 +111,7 @@ if __name__ == "__main__":
 			PrintUsage()
 			os._exit(0)
 		fileType = sys.argv[3]
-		cmd = "find * -name *" + fileType + " > data" 
+		cmd = "find * -name \"*" + fileType + "\" > data"
 		os.system(cmd)
 		f_data = open("data")
 		while True:
