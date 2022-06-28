@@ -9,8 +9,9 @@
 # parameter tab means replace 4 space by tab
 # space means replace tab by 4 space
 # example:
-#   python3 TranslateTool.py testdata space   // which means replace all 4 space each line by tab
-#   python3 TranslateTool.py -all space  <fileType>     // which means all .c file replace all 4 space each line by tab, fileType means .c .cpp .go .py etc...
+#   python3 TranslateTool.py cleanup  <fileType|fileName>    // to clear extra space or tab
+#   python3 TranslateTool.py testdata space                  // which means replace all 4 space each line by tab
+#   python3 TranslateTool.py -all space  <fileType>          // which means all .c file replace all 4 space each line by tab, fileType means .c .cpp .go .py etc...
 ```
 
 # TODO
