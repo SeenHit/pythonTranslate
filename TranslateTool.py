@@ -64,7 +64,7 @@ def replaceFile(fileName, command):
 		f.close()
 		print ("clean file <" + fileName.rstrip('\n') + "> success! check it!")
 	except:
-		os.system("rm " + fileName)
+		os.system("git checkout -- " + fileName)
 
 def DoCleanupJob():
 	fileType = sys.argv[2]
